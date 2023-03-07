@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceBetween,
-//                                    verticalAlignment = Alignment.CenterVertically
+                                    verticalAlignment = Alignment.CenterVertically
 
                                 ) {
                                     Image(
