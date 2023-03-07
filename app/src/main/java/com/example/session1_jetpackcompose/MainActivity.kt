@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             backgroundColor = Color.White,
-//                            elevation = 0.dp,
+                            elevation = 0.dp,
                             title = {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
