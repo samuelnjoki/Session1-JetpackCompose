@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     topBar = {
                         TopAppBar(
                             backgroundColor = Color.White,
-                            elevation = 0.dp,
+//                            elevation = 0.dp,
                             title = {
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
@@ -69,14 +69,7 @@ class MainActivity : ComponentActivity() {
                 ) 
 
                 {
-                    Column(
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth().height(500.dp).padding(10.dp)
 
-
-
-                    ) {
                         LazyRow(
                             modifier = Modifier.fillMaxSize()
                         )
@@ -164,22 +157,15 @@ class MainActivity : ComponentActivity() {
 
 
                         Row(
-                            modifier = Modifier.fillMaxWidth().background(Color.Blue).padding(10.dp),
+                            modifier = Modifier.fillMaxWidth().padding(10.dp),
                             horizontalArrangement = Arrangement.SpaceBetween
                         )
                         {
                             Text(text = "Best Destination")
-                            Text(text = "View all",color=Color.Blue)
+                            Text(text = "View all")
                         }
-                        Row(
-                                modifier = Modifier.fillMaxWidth().background(Color.Blue).padding(10.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                        )
-                        {
-                            Text(text = "Best Destination")
-                            Text(text = "View all",color=Color.Red)
-                        }
-                    }
+
+
 
 
                     
@@ -187,7 +173,7 @@ class MainActivity : ComponentActivity() {
 
                
                 }
-
+          
 
                    }
 
