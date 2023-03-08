@@ -3,11 +3,11 @@ package com.example.session1_jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material.*
@@ -18,14 +18,20 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.session1_jetpackcompose.ui.theme.Session1JetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -35,150 +41,289 @@ class MainActivity : ComponentActivity() {
 
                 Scaffold(
                     topBar = {
-                        TopAppBar(
-                            backgroundColor = Color.White,
-                            elevation = 0.dp,
-                            title = {
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    verticalAlignment = Alignment.CenterVertically
-
-                                ) {
-                                    Image(
-                                        modifier = Modifier.size(30.dp),
-                                        painter = painterResource(id = R.drawable.img_2),
-
-                                        contentDescription = null,
-
-
-                                    )
-
-                                    Icon(
-                                        modifier=Modifier.size(20.dp),
-                                        imageVector = Icons.Default.Notifications,
-                                        contentDescription = null,
-                                          tint=Color.Black
-
-                                    )
-
-                                }
-                            }
-                        )
+                        TopAppBar()
                     }
                 ) 
 
                 {
+                    LazyColumn(){
+                        item {
+                            LazyRow(
+                                modifier = Modifier.fillMaxSize()
+                            )
+                            {
+                                MountainCards()
 
-                        LazyRow(
-                            modifier = Modifier.fillMaxSize()
-                        )
-                        {
-                            items(3) {
-                                Card(
-                                    modifier = Modifier
-                                        .padding(10.dp)
-                                        .width(190.dp)
-                                        .height(150.dp)
-                                        .clip(shape = RoundedCornerShape(15.dp)),
-
-//                                    backgroundColor = Color.Red
-
-
+                            }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
 
                                 ) {
-                                    Image(painter = painterResource(id = R.drawable.img_3), contentDescription = null)
-                                    Box(
-                                        modifier = Modifier
-//                                        .fillMaxWidth()
-                                            .padding(horizontal = 0.dp, vertical = 35.dp)
-//                                        .height(50.dp),
-                                            .background(Color.Transparent),
-                                        contentAlignment = Alignment.Center
+                                Text(
+                                    text = "Best Destinations",
+                                    fontWeight = FontWeight.ExtraBold,
+                                    )
+                                Text(
+                                    text = "View all",
+                                    color = Color.Blue)
+                            }
+                            Column() {
+                                LazyRow(
 
+                                ){
 
-                                    ) {
-                                        Column(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(8.dp),
+                                    DestinationCard()
 
-
-                                            ) {
-                                            Column {
-                                                Row(
-                                                    modifier = Modifier.fillMaxWidth(),
-                                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                                ) {
-                                                    Text(
-                                                        text = "Northern Mountain",
-                                                        color=Color.White,
-                                                        fontWeight = FontWeight.Bold
-                                                    )
-                                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                                        Icon(
-                                                            imageVector = Icons.Default.Star,
-                                                            contentDescription = null
-                                                        )
-
-                                                        Text(
-                                                            text = "4.9"
-                                                        )
-                                                    }
-
-
-                                                }
-
-                                                Row(
-                                                    modifier = Modifier.fillMaxWidth(),
-
-                                                    ) {
-
-                                                    Icon(
-                                                        imageVector = Icons.Default.LocationOn,
-                                                        contentDescription = null
-                                                    )
-
-                                                    Text(
-                                                        text = "Tekergat, Sunamgnj",
-                                                        color=Color.White
-                                                    )
-
-
-                                                }
-                                            }
-                                        }
                                     }
+
                                 }
 
                             }
 
+                                    }
+
+                                }
+
+                            }
+
+
+                    }
+
+                }
+
+    private fun LazyListScope.DestinationCard() {
+        items(destinations) { destination ->
+            Card(
+                modifier = Modifier
+
+
+                    .padding(5.dp)
+                    .width(200.dp),
+                shape = RoundedCornerShape(12.dp),
+                backgroundColor = Color.Red
+
+
+            ) {
+
+                Column() {
+                    Image(
+                        painter = painterResource(id = destination.image),
+                        contentDescription = null
+                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+
+
+                        ) {
+
+
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    modifier = Modifier.alpha(0.9f),
+                                    text = destination.name,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Row(
+
+                                    verticalAlignment = Alignment.CenterVertically
+
+                                ) {
+                                    Icon(
+                                        modifier = Modifier.size(18.dp),
+                                        imageVector = destination.icon,
+                                        contentDescription = null,
+                                        tint = Color.Yellow
+                                    )
+
+                                    Text(
+                                        text = destination.rating.toString()
+                                    )
+                                }
+
+
+                            }
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+
+                                ) {
+
+                                Icon(
+                                    modifier = Modifier.size(20.dp),
+                                    imageVector = destination.icon2,
+                                    contentDescription = null
+                                )
+
+                                Text(
+                                    text = destination.name,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Light
+                                )
+
+
+                            }
                         }
+                    }
+                }
 
 
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
+            }
+
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+private fun LazyListScope.MountainCards() {
+        items(mountains) {
+                mountain->
+            Card(
+                modifier = Modifier
+                    .padding(10.dp).background(Color.Yellow)
+                    .wrapContentHeight()
+                    .wrapContentWidth()
+                    .clip(shape = RoundedCornerShape(15.dp))
+
+
+
+                ) {
+
+                Box(
+                    modifier = Modifier.fillMaxSize()
+                        .alpha(1f)
+
+//                        .padding(horizontal = 0.dp, vertical = 35.dp)
+//                        .height(200.dp)
+//                        .width(200.dp)
+                        .wrapContentHeight()
+                        .wrapContentWidth()
+
+                        .background(Color.Transparent),
+                    contentAlignment = Alignment.BottomCenter
+
+
+                ) {
+                    Image(
+                        painter = painterResource(mountain.image),
+                        contentDescription = null)
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+
+
+                        ) {
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                            ) {
+                                Text(
+                                    modifier=Modifier.align(Alignment.Bottom),
+                                    text = mountain.name,
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = mountain.icon,
+                                        contentDescription = null,
+                                        tint=Color.Yellow,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+
+                                    Text(
+                                        modifier=Modifier.align(Alignment.Bottom),
+                                        text = mountain.rating.toString(),
+                                        color=Color.White
+
+                                    )
+                                }
+
+
+                            }
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+
+                                ) {
+
+                                Icon(
+                                    imageVector = mountain.icon2,
+                                    contentDescription = null,
+                                    tint=Color.White
+                                )
+
+                                Text(
+
+                                    text = mountain.location,
+                                    color = Color.White
+                                )
+
+
+                            }
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    @Composable
+    private fun TopAppBar() {
+        TopAppBar(
+            backgroundColor = Color.White,
+            elevation = 0.dp,
+            title = {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+
+                ) {
+                    Image(
+                        modifier = Modifier.size(30.dp),
+                        painter = painterResource(id = R.drawable.img_2),
+
+                        contentDescription = null,
+
+
                         )
-                        {
-                            Text(text = "Best Destination")
-                            Text(text = "View all")
-                        }
 
+                    Icon(
+                        modifier = Modifier.size(20.dp),
+                        imageVector = Icons.Default.Notifications,
+                        contentDescription = null,
+                        tint = Color.Black
 
-
-
-                    
-                }
-
-               
-                }
-          
-
-                   }
+                    )
 
                 }
             }
+        )
+    }
+
 
 
 
@@ -188,25 +333,100 @@ class MainActivity : ComponentActivity() {
 
     }
 
-    //@Composable
-//fun HeaderName() {
-//
-//
-//}
-    @Composable
-    fun LazyColumnExample() {
-        LazyColumn(
+ data class Mountain(
+     val icon:ImageVector,
+     val icon2:ImageVector,
+     val image:Int,
+     val name:String,
+     val location:String,
+     val rating:Float
 
-        ) {
-            item {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(text = "Category")
-                    Text(text = "See All")
-                }
-            }
+ )
 
-        }
-    }
+val mountains= listOf(
+    Mountain(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_6,
+        name= "Northern Mountain",
+        location = "Tekergat, Sunamgnj",
+        rating = 4.9f
+    ),
+    Mountain(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_6,
+        name="Niladri Reservoir",
+        location="Tekergat, Sunamgnj",
+        rating = 4.9f
+    ),
+    Mountain(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_6,
+        name="Niladri Reservoir",
+        location="Tekergat, Sunamgnj",
+        rating = 4.9f
+    ),
+    Mountain(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_6,
+        name="Niladri Reservoir",
+        location="Tekergat, Sunamgnj",
+        rating = 4.9f
+    ),
+    Mountain(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_6,
+        name="Niladri Reservoir",
+        location="Tekergat, Sunamgnj",
+        rating = 4.9f
+    )
+)
 
+data class Destination(
+    val icon:ImageVector,
+    val icon2:ImageVector,
+    val image:Int,
+    val name:String,
+    val location:String,
+    val rating:Float
+)
 
+val destinations = listOf(
+    Destination(
+        icon=Icons.Default.Star,
+        icon2=Icons.Default.LocationOn,
+        image=R.drawable.img_3,
+        name="Niladri Reservoir",
+        location="Tekergat, Sunamgnj",
+        rating = 4.9f
+    ),
+    Destination(
+        icon2=Icons.Default.LocationOn,
+        icon=Icons.Default.Star,
+       image=R. drawable.img_4,
+       name="Darma Reservoir",
+        location="Darma, Sunamgnj",
+        rating = 4.9f
+    ),
+    Destination(
+        icon2=Icons.Default.LocationOn,
+        icon=Icons.Default.Star,
+        image=R. drawable.img_4,
+        name="Darma Reservoir",
+        location="Darma, Sunamgnj",
+        rating = 4.9f
+    ),
+    Destination(
+        icon2=Icons.Default.LocationOn,
+        icon=Icons.Default.Star,
+        image=R. drawable.img_4,
+        name="Darma Reservoir",
+        location="Darma, Sunamgnj",
+        rating = 4.9f
+    )
+)
 
