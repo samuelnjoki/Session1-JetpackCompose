@@ -78,21 +78,6 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                 }
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-
-                                ) {
-                                Text(
-                                    text = "Best Destinations",
-                                    fontWeight = FontWeight.ExtraBold,
-                                )
-                                Text(
-                                    text = "View all",
-                                    color = Color.Blue)
-                            }
 
                             Column() {
                                 LazyRow(
@@ -104,22 +89,18 @@ class MainActivity : ComponentActivity() {
                                 }
 
                             }
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(10.dp),
-                                horizontalArrangement = Arrangement.SpaceBetween,
 
-                                ) {
-                                Text(
-                                    text = "Best Destinations",
-                                    fontWeight = FontWeight.ExtraBold,
-                                )
-                                Text(
-                                    text = "View all",
-                                    color = Color.Blue)
+
+                            Column() {
+                                LazyRow(
+
+                                ){
+
+                                    DestinationCard()
+
+                                }
+
                             }
-
                             Column() {
                                 LazyRow(
 
