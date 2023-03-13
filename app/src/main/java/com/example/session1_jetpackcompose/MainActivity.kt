@@ -3,7 +3,6 @@ package com.example.session1_jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,13 +24,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.session1_jetpackcompose.ui.theme.Session1JetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalFoundationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -70,6 +66,8 @@ class MainActivity : ComponentActivity() {
                                     text = "View all",
                                     color = Color.Blue)
                             }
+                            
+//                            Spacer(modifier = Modifier.height(15.dp))
                             Column() {
                                 LazyRow(
 
@@ -80,8 +78,61 @@ class MainActivity : ComponentActivity() {
                                     }
 
                                 }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+
+                                ) {
+                                Text(
+                                    text = "Best Destinations",
+                                    fontWeight = FontWeight.ExtraBold,
+                                )
+                                Text(
+                                    text = "View all",
+                                    color = Color.Blue)
+                            }
+
+                            Column() {
+                                LazyRow(
+
+                                ){
+
+                                    DestinationCard()
+
+                                }
 
                             }
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+
+                                ) {
+                                Text(
+                                    text = "Best Destinations",
+                                    fontWeight = FontWeight.ExtraBold,
+                                )
+                                Text(
+                                    text = "View all",
+                                    color = Color.Blue)
+                            }
+
+                            Column() {
+                                LazyRow(
+
+                                ){
+
+                                    DestinationCard()
+
+                                }
+
+                            }
+
+
+                        }
 
                                     }
 
@@ -100,10 +151,9 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier
 
 
-                    .padding(5.dp)
+                    .padding(8.dp)
                     .width(200.dp),
                 shape = RoundedCornerShape(12.dp),
-                backgroundColor = Color.Red
 
 
             ) {
@@ -131,7 +181,7 @@ class MainActivity : ComponentActivity() {
                                 Text(
                                     modifier = Modifier.alpha(0.9f),
                                     text = destination.name,
-                                    color = Color.White,
+                                    color = Color.Black,
                                     fontWeight = FontWeight.Bold
                                 )
                                 Row(
@@ -167,7 +217,7 @@ class MainActivity : ComponentActivity() {
 
                                 Text(
                                     text = destination.name,
-                                    color = Color.White,
+                                    color = Color.Black,
                                     fontWeight = FontWeight.Light
                                 )
 
@@ -197,36 +247,40 @@ private fun LazyListScope.MountainCards() {
                 mountain->
             Card(
                 modifier = Modifier
-                    .padding(10.dp).background(Color.Yellow)
+                    .padding(8.dp)
                     .wrapContentHeight()
                     .wrapContentWidth()
                     .clip(shape = RoundedCornerShape(15.dp))
 
 
 
+
+
                 ) {
 
                 Box(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .alpha(1f)
 
 //                        .padding(horizontal = 0.dp, vertical = 35.dp)
-//                        .height(200.dp)
-//                        .width(200.dp)
+                        .height(180.dp)
+                        .width(200.dp)
+
                         .wrapContentHeight()
                         .wrapContentWidth()
-
-                        .background(Color.Transparent),
-                    contentAlignment = Alignment.BottomCenter
+                        .clip(shape = RoundedCornerShape(15.dp))
+                        .background(Color.Yellow),
+                        contentAlignment = Alignment.BottomCenter
 
 
                 ) {
                     Image(
                         painter = painterResource(mountain.image),
-                        contentDescription = null)
+                        contentDescription = null,contentScale=ContentScale.Crop)
+
                     Column(
                         modifier = Modifier
-                            .fillMaxWidth()
                             .padding(8.dp),
 
 
@@ -293,7 +347,7 @@ private fun LazyListScope.MountainCards() {
     @Composable
     private fun TopAppBar() {
         TopAppBar(
-            backgroundColor = Color.White,
+//            backgroundColor = Color.White,
             elevation = 0.dp,
             title = {
                 Row(
@@ -303,8 +357,8 @@ private fun LazyListScope.MountainCards() {
 
                 ) {
                     Image(
-                        modifier = Modifier.size(30.dp),
-                        painter = painterResource(id = R.drawable.img_2),
+                        modifier = Modifier.size(30.dp).clip(shape=RoundedCornerShape(15.dp)),
+                        painter = painterResource(id = R.drawable.img2),
 
                         contentDescription = null,
 
@@ -315,7 +369,7 @@ private fun LazyListScope.MountainCards() {
                         modifier = Modifier.size(20.dp),
                         imageVector = Icons.Default.Notifications,
                         contentDescription = null,
-                        tint = Color.Black
+                        tint = Color.White
 
                     )
 
@@ -347,7 +401,7 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_6,
+        image=R.drawable.m1,
         name= "Northern Mountain",
         location = "Tekergat, Sunamgnj",
         rating = 4.9f
@@ -355,7 +409,7 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_6,
+        image=R.drawable.img_1,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -363,7 +417,7 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_6,
+        image=R.drawable.img_1,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -371,7 +425,7 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_6,
+        image=R.drawable.img_2,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -379,7 +433,7 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_6,
+        image=R.drawable.img_2,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -399,7 +453,7 @@ val destinations = listOf(
     Destination(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_3,
+        image=R.drawable.m1,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -407,7 +461,7 @@ val destinations = listOf(
     Destination(
         icon2=Icons.Default.LocationOn,
         icon=Icons.Default.Star,
-       image=R. drawable.img_4,
+       image=R. drawable.img_2,
        name="Darma Reservoir",
         location="Darma, Sunamgnj",
         rating = 4.9f
@@ -415,7 +469,7 @@ val destinations = listOf(
     Destination(
         icon2=Icons.Default.LocationOn,
         icon=Icons.Default.Star,
-        image=R. drawable.img_4,
+        image=R. drawable.img_1,
         name="Darma Reservoir",
         location="Darma, Sunamgnj",
         rating = 4.9f
@@ -423,7 +477,7 @@ val destinations = listOf(
     Destination(
         icon2=Icons.Default.LocationOn,
         icon=Icons.Default.Star,
-        image=R. drawable.img_4,
+        image=R. drawable.img_2,
         name="Darma Reservoir",
         location="Darma, Sunamgnj",
         rating = 4.9f
