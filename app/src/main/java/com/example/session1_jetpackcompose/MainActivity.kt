@@ -390,8 +390,8 @@ val mountains= listOf(
     Mountain(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.img_1,
-        name="Niladri Reservoir",
+        image=R.drawable.l,
+        name="Longonot Mountain",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
     ),
@@ -399,7 +399,7 @@ val mountains= listOf(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
         image=R.drawable.img_1,
-        name="Niladri Reservoir",
+        name="Aulob Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
     ),
@@ -434,7 +434,7 @@ val destinations = listOf(
     Destination(
         icon=Icons.Default.Star,
         icon2=Icons.Default.LocationOn,
-        image=R.drawable.m1,
+        image=R.drawable.l,
         name="Niladri Reservoir",
         location="Tekergat, Sunamgnj",
         rating = 4.9f
@@ -451,7 +451,7 @@ val destinations = listOf(
         icon2=Icons.Default.LocationOn,
         icon=Icons.Default.Star,
         image=R. drawable.img_1,
-        name="Darma Reservoir",
+        name="Swater Reservoir",
         location="Darma, Sunamgnj",
         rating = 4.9f
     ),
@@ -459,7 +459,7 @@ val destinations = listOf(
         icon2=Icons.Default.LocationOn,
         icon=Icons.Default.Star,
         image=R. drawable.img_2,
-        name="Darma Reservoir",
+        name="Chania Reservoir",
         location="Darma, Sunamgnj",
         rating = 4.9f
     )
